@@ -22,6 +22,10 @@ cron.schedule('*/30 * * * *', () => {
     promiseExecutionVillages();
 });
 
+// Run manually once
+promiseExecutionUser();
+promiseExecutionVillages();
+
 async function v() {
         // step 1, get all villages
         let villages = await m.getVillages();
