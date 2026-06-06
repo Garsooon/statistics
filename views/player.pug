@@ -111,7 +111,17 @@ html(lang="en")
                             span#total-bans
                         div.card-title.ban-list
                             label.col-6.col-6 Bans
-                            button(type="button",id="view",data-toggle="modal",data-target="#myModal",).btn.btn-sm.btn-primary View Bans
+                            button(type="button",id="view",data-toggle="modal",data-target="#myModal").btn.btn-sm.btn-primary View Bans
+
+                br
+                div.card.bg-dark.achievements-card
+                  div.card-header
+                    strong Achievements
+                  div.card-body
+                    div.achievement-container.d-flex.flex-wrap
+                      each badge in data.badges
+                        div.achievement.m-1(title=badge.name)
+                          img(src=badge.icon, alt=badge.name, width="40", height="40")
 
                 div.modal#myModal
                     div.modal-dialog

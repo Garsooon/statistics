@@ -1,0 +1,27 @@
+module.exports = [
+  // bevo achievements
+  { id: 100, key: "weNeedToGoDeeper",    name: "We Need to Go Deeper",   icon: "/assets/achievements/weNeedToGoDeeper.png",    special: false },
+  { id: 101, key: "returnToSender",      name: "Return to Sender",       icon: "/assets/achievements/returnToSender.png",      special: true  },
+  { id: 102, key: "subspaceBubble",      name: "Subspace Bubble",        icon: "/assets/achievements/subspaceBubble.png",      special: true  },
+  { id: 103, key: "takeAim",             name: "Take Aim",               icon: "/assets/achievements/takeAim.png",             special: false },
+  { id: 104, key: "cliffDiver",          name: "Cliff Diver",            icon: "/assets/achievements/cliffDiver.png",          special: false },
+  { id: 105, key: "monstersHunted",      name: "Monsters Hunted",        icon: "/assets/achievements/monstersHunted.png",      special: true  },
+  { id: 106, key: "adventuringTime",     name: "Adventuring Time",       icon: "/assets/achievements/adventuringTime.png",     special: false },
+  { id: 107, key: "iceBucketChallenge",  name: "Ice Bucket Challenge",   icon: "/assets/achievements/iceBucketChallenge.png",  special: false },
+  { id: 108, key: "hotStuff",            name: "Hot Stuff",              icon: "/assets/achievements/hotStuff.png",            special: false },
+  { id: 109, key: "suitUp",             name: "Suit Up",                icon: "/assets/achievements/suitUp.png",              special: false },
+  { id: 110, key: "diamonds",            name: "DIAMONDS!",              icon: "/assets/achievements/diamonds.png",            special: true  },
+  { id: 111, key: "coverMeWithDiamonds", name: "Cover Me with Diamonds", icon: "/assets/achievements/coverMeWithDiamonds.png", special: false },
+  // bevo server-only achievements
+  { id: 200, key: "bevoFirstJoin",       name: "Bevo First Join",        icon: "/assets/achievements/bevoFirstJoin.png",       special: false, server: true },
+  { id: 201, key: "contributor",         name: "Contributor",            icon: "/assets/achievements/contributor.png",         special: false, server: true },
+  { id: 202, key: "staff",              name: "Staff",                  icon: "/assets/achievements/staff.png",               special: false, server: true },
+  { id: 203, key: "formerStaff",         name: "Former Staff",           icon: "/assets/achievements/formerStaff.png",         special: false, server: true },
+  { id: 204, key: "developer",           name: "Developer",              icon: "/assets/achievements/developer.png",           special: false, server: true },
+  { id: 205, key: "formerDeveloper",     name: "Former Developer",       icon: "/assets/achievements/formerDeveloper.png",     special: false, server: true },
+  { id: 206, key: "donator",             name: "Donator",                icon: "/assets/achievements/donator.png",             special: false, server: true },
+  { id: 207, key: "oneHundredThousand",  name: "100,000",                icon: "/assets/achievements/oneHundredThousand.png",  special: false, server: true },
+  { id: 208, key: "millionaire",         name: "Millionaire",            icon: "/assets/achievements/millionaire.png",         special: false, server: true },
+  { id: 209, key: "tourneyWinner",       name: "Tourney Winner",         icon: "/assets/achievements/tourneyWinner.png",       special: false, server: true },
+  { id: 210, key: "diamondCitizen",      name: "Diamond Citizen",        icon: "/assets/achievements/diamondCitizen.png",      special: false, server: true },
+];
