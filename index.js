@@ -1,6 +1,7 @@
 const express = require("express");
 const compression = require("compression");
 const helmet = require("helmet");
+const achievements = require('./data/achievements');
 const m = require("./lib/functions");
 const db = require("./lib/db");
 let types = {
@@ -294,8 +295,17 @@ app.get('/player/:player', async (req, res) => {
     if(req.params.player) {
         let player = await m.searchUser(db, req.params.player);
         if(player) {
-            let user = await(m.getUser(player['uuid']));
-            !user ? res.status(404).render('error', {status: '404', msg: 'User not found.'}) :  res.render('player', {data: user,m});  
+            let user = await m.getUser(player['uuid']);
+            if(!user) return res.status(404).render('error', {status: '404', msg: 'User not found.'});
+
+            let earnedAchievements = await m.getPlayerAchievements(player['uuid']);
+            // API may return objects with an `id` field or bare numeric IDs
+            const earnedIds = new Set(earnedAchievements.map(e => (typeof e === 'object' ? e.id : e)));
+            user.badges = achievements
+                .filter(a => earnedIds.has(a.id))
+                .map(a => ({ name: a.name, icon: a.icon, special: a.special }));
+
+            res.render('player', { data: user, m });
         }
         else {
             res.status(404).render('error', {status: '500', msg: 'Oops! Minecraft user does not exist.'});        
