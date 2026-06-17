@@ -300,10 +300,14 @@ app.get('/player/:player', async (req, res) => {
 
             let earnedAchievements = await m.getPlayerAchievements(player['uuid']);
             // API may return objects with an `id` field or bare numeric IDs
-            const earnedIds = new Set(earnedAchievements.map(e => (typeof e === 'object' ? e.id : e)));
+            const earnedIds = new Set(earnedAchievements.map(e => {
+                const val = typeof e === 'object' ? e.id : e;
+                return typeof val === 'string' ? parseInt(val, 10) : val;
+            }));
             user.badges = achievements
-                .filter(a => earnedIds.has(a.id))
-                .map(a => ({ name: a.name, icon: a.icon, special: a.special }));
+                .filter(a => earnedIds.has(a.id) && a.icon && (a.server || a.special))
+                .sort((a, b) => (b.server ? 1 : 0) - (a.server ? 1 : 0))
+                .map(a => ({ name: a.name, icon: a.icon, special: a.special, server: a.server }));
 
             res.render('player', { data: user, m });
         }

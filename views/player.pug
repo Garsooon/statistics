@@ -120,8 +120,8 @@ html(lang="en")
                   div.card-body
                     div.achievement-container.d-flex.flex-wrap
                       each badge in data.badges
-                        div.achievement.m-1(title=badge.name)
-                          img(src=badge.icon, alt=badge.name, width="40", height="40")
+                        div.achievement.m-1(class=badge.server ? 'server' : (badge.special ? 'special' : ''), title=badge.name)
+                          img(src=badge.icon, alt=badge.name)
 
                 div.modal#myModal
                     div.modal-dialog
