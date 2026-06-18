@@ -36,7 +36,7 @@ module.exports = [
   { id: 203, key: "formerStaff",         name: "Former Staff",           icon: "/assets/badges/veteran.png",             special: false, server: true },
   { id: 204, key: "developer",           name: "Developer",              icon: "/assets/badges/developer.png",           special: false, server: true },
   { id: 205, key: "formerDeveloper",     name: "Former Developer",       icon: "/assets/badges/formerDeveloper.png",     special: false, server: true },
-  { id: 206, key: "donator",             name: "Donator",                icon: "/assets/badges/donator.png",             special: false, server: true },
+  { id: 206, key: "donator",             name: "Donator",                icon: "/assets/badges/Invicon_Gold_Ingot.png",             special: false, server: true },
   { id: 207, key: "oneHundredThousand",  name: "100,000",                icon: "/assets/badges/oneHundredThousand.png",  special: false, server: true },
   { id: 208, key: "millionaire",         name: "Millionaire",            icon: "/assets/badges/Invicon_Gold_Ingot.png",  special: false, server: true },
   { id: 209, key: "tourneyWinner",       name: "Tourney Winner",         icon: "/assets/badges/tourneyWinner.png",       special: false, server: true },
