@@ -32,9 +32,9 @@ module.exports = [
   // bevo server-only achievements
   { id: 200, key: "bevoFirstJoin",       name: "Bevo First Join",        icon: "/assets/badges/Invicon_Grass_Block.png",       special: false, server: true },
   { id: 201, key: "contributor",         name: "Contributor",            icon: "/assets/badges/contributor.png",         special: false, server: true },
-  { id: 202, key: "staff",              name: "Staff",                  icon: "/assets/badges/staff.png",               special: false, server: true },
+  { id: 202, key: "staff",              name: "Staff",                  icon: "/assets/badges/Invicon_Iron_Sword.png",               special: false, server: true },
   { id: 203, key: "formerStaff",         name: "Former Staff",           icon: "/assets/badges/veteran.png",             special: false, server: true },
-  { id: 204, key: "developer",           name: "Developer",              icon: "/assets/badges/developer.png",           special: false, server: true },
+  { id: 204, key: "developer",           name: "Developer",              icon: "/assets/badges/Compass.gif",           special: false, server: true },
   { id: 205, key: "formerDeveloper",     name: "Former Developer",       icon: "/assets/badges/formerDeveloper.png",     special: false, server: true },
   { id: 206, key: "donator",             name: "Donator",                icon: "/assets/badges/Invicon_Gold_Ingot.png",             special: false, server: true },
   { id: 207, key: "oneHundredThousand",  name: "100,000",                icon: "/assets/badges/oneHundredThousand.png",  special: false, server: true },
