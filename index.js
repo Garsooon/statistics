@@ -112,6 +112,52 @@ app.post('/api/searchVillages', async (req, res) => {
     }
 })
 
+// search nations
+app.post('/api/searchNations', async (req, res) => {
+    if(req.body['nation']) {
+        let nations = await m.getNations();
+
+        if(nations) {
+            let regex = new RegExp(req.body['nation'], 'i');
+            let filtered = nations.filter(e => regex.test(e.name));
+
+            if(filtered.length != 0) {
+                let n = [];
+                const promises = filtered.map(async (element) => {
+                    let username = await m.searchUser(db, element.owner);
+                    n.push({
+                        owner: username ? username.username : 'Unknown',
+                        owner_uuid: element.owner,
+                        name: element.name,
+                        uuid: element.uuid,
+                        villages: element.villages
+                    });
+                });
+
+                await Promise.all(promises);
+
+                res.json({
+                    data: n,
+                    status: true
+                });
+            }
+            else {
+                res.json({
+                    status: false, code: 2, msg: "no nations found"
+                })
+            }
+        }
+        else {
+            res.json({
+                status: false, code: 2, msg: "no nations found"
+            })
+        }
+    }
+    else {
+        res.status(500).json({status: false, message: "invalid params"});
+    }
+})
+
 // online status
 app.get('/api/online', async (req, res) => {
     if(req.query['username']) {
@@ -202,6 +248,10 @@ app.get('/chat', (req, res) => {
 
 app.get('/villages', (req, res) => {
     res.render('villages');
+});
+
+app.get('/nations', (req, res) => {
+    res.render('nations');
 });
 
 // get the user villages
@@ -365,8 +415,41 @@ app.get('/village/:village', async (req, res) => {
 });
 
 
+app.get('/nation/:nation', async (req, res) => {
+    if(req.params.nation) {
+        let uuid = req.params.nation;
+
+        if(!m.isUUID(uuid)) {
+            let nations = await m.getNations();
+            if(nations) {
+                let found = nations.find(n => n.name.toLowerCase() === uuid.toLowerCase());
+                if(found) uuid = found.uuid;
+                else return res.status(404).render('error', {status: '404', msg: 'Oops! Nation does not exist.'});
+            }
+            else {
+                return res.status(404).render('error', {status: '404', msg: 'Oops! Nation does not exist.'});
+            }
+        }
+
+        let nation = await m.getNation(uuid);
+        if(nation && nation.found) {
+            let username = await m.searchUser(db, nation.owner);
+            nation.username = username ? username.username : 'Unknown';
+            nation.villageList = nation.villages || [];
+
+            res.render('nation', {data: nation, m});
+        }
+        else {
+            res.status(404).render('error', {status: '404', msg: 'Oops! Nation does not exist.'});
+        }
+    }
+    else {
+        res.status(500).render('error', {status: '500', msg: 'Oops! Invalid parameters.'});
+    }
+});
+
 app.get('*', (req, res) => {
-    res.status(404).render('error', {status: '404', msg: 'Page not found.'});        
+    res.status(404).render('error', {status: '404', msg: 'Page not found.'});
 });
 
 

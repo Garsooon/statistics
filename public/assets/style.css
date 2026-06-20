@@ -43,6 +43,10 @@ color: #00c377;
 .villagetb {
     display: none;
 }
+
+.nationtb {
+    display: none;
+}
 #is_banned {
     text-decoration: line-through;
     text-decoration-color: #dc3545;

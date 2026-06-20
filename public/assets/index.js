@@ -81,6 +81,59 @@ $("#villageSearch").keyup(function () {
 });
 
 
+let lastNationValue = null;
+let nationEmpty = true;
+
+$("#nationSearch").on('paste', function (e) {
+	$(e.target).keyup();
+});
+
+$("#nationSearch").keyup(function () {
+	let name = $('#nationSearch').val();
+	if (name == "" || name.length < 3) {
+		$(".nationstb").html("");
+		$(".nationtb").hide();
+		nationEmpty = true;
+	} else {
+		if (name == lastNationValue && nationEmpty == false) {
+			return;
+		} else {
+			lastNationValue = name;
+			nationEmpty = false;
+		}
+
+		$.ajax({
+			type: "POST",
+			url: "api/searchNations",
+			data: {
+				nation: name
+			},
+			dataType: 'json',
+			success: function (data) {
+				if (data.code == 2) {
+					$(".nationstb").show().html("No nations found");
+					$(".nationtb").hide();
+				} else {
+					let builder = '';
+					data.data.forEach((element, key) => {
+						builder += `<tr>`
+						builder += `<td>${key+1}</td>`
+						builder += `<td><a href="./nation/${element.uuid}">${element.name}</a></td>`
+						builder += `<td><img src="https://skins.legacyminecraft.com/avatars/${element.owner_uuid}?size=25&amp;overlay"> <a href="../player/${element.owner_uuid}"> ${element.owner}</a></td>`
+						builder += `<td>${element.villages.toLocaleString()}</td>`
+						builder += `</tr>`;
+					});
+
+					$(".nationstb").hide();
+					$(".nationtb").show();
+					$(".nation").html(builder).show();
+				}
+			}
+		});
+	}
+});
+
+
 if ($(".fetchChat").length) {
 
 	setInterval(
