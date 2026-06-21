@@ -1,0 +1,57 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+    meta(name="theme-color", content="#111111")
+    meta(name="description" content="View the nation "+ data.name + " owned by "+ data.username +" on RetroMC using J-Stats!")
+    meta(content="https://skins.legacyminecraft.com/avatars/"+ data.owner+"?size=128&overlay" property="og:image")
+    link(rel="canonical" href="https://j-stats.xyz/nation/" + data.uuid)
+    link(rel="icon" href="https://skins.legacyminecraft.com/avatars/"+ data.owner+"?size=128&overlay")
+    title J-Stats² | Nation !{data.name}
+    // links
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css", rel="stylesheet")
+    link(href="../assets/style.css?v=" + process.env.assetVersion, rel="stylesheet")
+  body
+    include ../partials/header.pug
+
+    div.container.mt-5
+        h1 Nation !{data.name}
+
+        div.d-flex.justify-content-between
+            div.item
+                p Owned by #[img(src=`https://skins.legacyminecraft.com/avatars/`+ data.owner +`?size=25&amp;overlay`)] #[a(href="../player/" + data.owner) !{data.username}]
+            div.item
+                p.vCreation Created on !{m.unixToDate2(data.creationTime)}
+
+        .row
+          .col-lg-6
+            .card.bg-dark
+              .card-header Statistics
+              .card-body
+                .card-title
+                  label.col-6.col-md-6(style='font-weight: bold;') Balance
+                  strong #{data.balance}
+                .card-title
+                  label.col-6.col-md-6(style='font-weight: bold;') Villages
+                  strong #{data.villageList.length}
+            br
+          .col-lg-6
+            .card.bg-dark
+              .card-header Villages
+              .card-body(style='max-height: 300px; overflow: scroll;')
+                each val in data.villageList
+                  div
+                    a(href="../village/" + val.uuid) !{val.name}
+                if data.villageList.length == 0
+                  | No villages in this nation.
+            br
+
+    // scripts
+    script(src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js")
+    script(src="../assets/index.js?v=" + process.env.assetVersion)
+    include ../partials/footer.pug
